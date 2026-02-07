@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine API</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 40px;
+    }
+    .json {
+      background: #020617;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .key { color: #38bdf8; }
+    .string { color: #86efac; }
+  </style>
+</head>
+<body>
+
+<h2>GET /api/valentine</h2>
+
+<div class="json">
+<pre>{
+  <span class="key">"question"</span>: <span class="string">"Will you be my Valentine?"</span>,
+  <span class="key">"allowedResponses"</span>: [<span class="string">"YES"</span>],
+  <span class="key">"fallback"</span>: <span class="string">"No alternative endpoint available"</span>,
+  <span class="key">"status"</span>: <span class="string">"Awaiting confirmation ❤️"</span>
+}</pre>
+</div>
+
+</body>
+</html>
