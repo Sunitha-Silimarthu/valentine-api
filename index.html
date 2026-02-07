@@ -2,107 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Message</title>
+  <title>Anklet Bell Walk</title>
+
   <style>
     body {
-      font-family: monospace;
-      background: linear-gradient(135deg, #020617, #0f172a);
-      color: #e5e7eb;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .container {
+      font-family: Arial, sans-serif;
+      background: #fff5f8;
       text-align: center;
-      max-width: 90%;
+      padding-top: 50px;
     }
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 30px;
+    #text {
+      font-size: 18px;
+      margin-bottom: 20px;
     }
 
     button {
-      font-family: monospace;
-      padding: 14px 26px;
+      padding: 12px 25px;
       font-size: 16px;
-      border-radius: 8px;
       border: none;
+      border-radius: 25px;
+      background: #ff5c8a;
+      color: white;
       cursor: pointer;
-      background: #f59e0b;
-      color: #3b1d00;
     }
 
-    .message {
-      margin-top: 30px;
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 1.6;
-      white-space: pre-line;
+    button:hover {
+      background: #ff3f75;
     }
 
-    .angry {
+    #walkArea {
+      display: none;
+      margin-top: 40px;
+      height: 120px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .legs {
       position: absolute;
-      font-size: 24px;
-      animation: float 2s linear forwards;
+      left: -150px;
+      display: flex;
+      gap: 20px;
+      animation: walk 3s linear infinite;
     }
 
-    @keyframes float {
-      0% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-160px);
-      }
+    .leg {
+      width: 30px;
+      height: 90px;
+      background: #f2c6a0;
+      border-radius: 15px;
+      position: relative;
+      animation: step 0.6s ease-in-out infinite alternate;
+    }
+
+    .leg.right {
+      animation-delay: 0.3s;
+    }
+
+    .anklet {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: gold;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.9);
+    }
+
+    @keyframes step {
+      from { transform: rotate(6deg); }
+      to { transform: rotate(-6deg); }
+    }
+
+    @keyframes walk {
+      from { left: -150px; }
+      to { left: 100%; }
     }
   </style>
 </head>
+
 <body>
 
-<div class="container">
-  <h1 id="title">Rahul, click on the button below</h1>
+  <div id="text">
+    Rahul, click on the button below
+  </div>
 
-  <button id="actionBtn" onclick="showAnger()">Babylu</button>
+  <button onclick="startWalk()">Click Me 💖</button>
 
-  <div class="message" id="message"></div>
-</div>
+  <div id="walkArea">
+    <div class="legs">
+      <div class="leg left">
+        <div class="anklet"></div>
+      </div>
+      <div class="leg right">
+        <div class="anklet"></div>
+      </div>
+    </div>
+  </div>
 
-<script>
-  function showAnger() {
-    // Remove title text
-    document.getElementById("title").remove();
+  <!-- Anklet Bell Sound -->
+  <audio id="bellSound" preload="auto">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-small-bell-ring-588.mp3" type="audio/mpeg">
+  </audio>
 
-    // Remove button
-    document.getElementById("actionBtn").remove();
+  <script>
+    let bellInterval;
 
-    // Show Telugu angry message
-    document.getElementById("message").innerText =
-      "పెద్దునే లేచి కాల్ చేయాలని లేదు ఏమి లేదు..\n YOU ARE UNBELIEVABLE.";
+    function startWalk() {
+      document.getElementById("text").style.display = "none";
+      document.getElementById("walkArea").style.display = "block";
 
-    // Start angry emoji animation
-    setInterval(createAngryEmoji, 200);
-  }
+      const bell = document.getElementById("bellSound");
 
-  function createAngryEmoji() {
-    const emojis = ["😡", "😤", "🤬"];
-    const emoji = document.createElement("div");
-    emoji.className = "angry";
-    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-
-    emoji.style.left = Math.random() * window.innerWidth + "px";
-    emoji.style.top = "80%";
-
-    document.body.appendChild(emoji);
-
-    setTimeout(() => emoji.remove(), 2000);
-  }
-</script>
+      // Play bell repeatedly like anklets while walking
+      bellInterval = setInterval(() => {
+        bell.currentTime = 0;
+        bell.play();
+      }, 600); // sync with step animation
+    }
+  </script>
 
 </body>
 </html>
