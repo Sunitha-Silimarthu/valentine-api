@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Anklet Bell Walk</title>
+  <title>Gunguruu Walk</title>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #fff5f8;
+      background: #fff0f5;
       text-align: center;
       padding-top: 50px;
+      overflow: hidden;
     }
 
     #text {
@@ -18,66 +19,65 @@
     }
 
     button {
-      padding: 12px 25px;
+      padding: 12px 28px;
       font-size: 16px;
       border: none;
-      border-radius: 25px;
-      background: #ff5c8a;
+      border-radius: 30px;
+      background: #ff4f87;
       color: white;
       cursor: pointer;
     }
 
     button:hover {
-      background: #ff3f75;
+      background: #ff2f6d;
     }
 
     #walkArea {
       display: none;
       margin-top: 40px;
-      height: 120px;
-      overflow: hidden;
+      height: 140px;
       position: relative;
     }
 
     .legs {
       position: absolute;
-      left: -150px;
+      left: -200px;
       display: flex;
-      gap: 20px;
-      animation: walk 3s linear infinite;
+      gap: 30px;
+      animation: walk 4s linear infinite;
     }
 
     .leg {
-      width: 30px;
-      height: 90px;
-      background: #f2c6a0;
-      border-radius: 15px;
+      width: 32px;
+      height: 100px;
+      background: #f3c7a6;
+      border-radius: 18px;
       position: relative;
-      animation: step 0.6s ease-in-out infinite alternate;
+      animation: step 0.7s ease-in-out infinite alternate;
     }
 
     .leg.right {
-      animation-delay: 0.3s;
+      animation-delay: 0.35s;
     }
 
     .anklet {
       position: absolute;
-      bottom: 10px;
-      left: 0;
-      width: 100%;
-      height: 6px;
+      bottom: 12px;
+      left: -6px;
+      width: 44px;
+      height: 10px;
       background: gold;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(255, 215, 0, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 1);
     }
 
     @keyframes step {
-      from { transform: rotate(6deg); }
-      to { transform: rotate(-6deg); }
+      from { transform: rotate(7deg); }
+      to { transform: rotate(-7deg); }
     }
 
     @keyframes walk {
-      from { left: -150px; }
+      from { left: -200px; }
       to { left: 100%; }
     }
   </style>
@@ -89,7 +89,7 @@
     Rahul, click on the button below
   </div>
 
-  <button onclick="startWalk()">Click Me 💖</button>
+  <button onclick="startGunguruu()">Click Me 💕</button>
 
   <div id="walkArea">
     <div class="legs">
@@ -102,25 +102,26 @@
     </div>
   </div>
 
-  <!-- Anklet Bell Sound -->
-  <audio id="bellSound" preload="auto">
-    <source src="https://assets.mixkit.co/sfx/preview/mixkit-small-bell-ring-588.mp3" type="audio/mpeg">
+  <!-- Gunguruu / Payal Musical Sound -->
+  <audio id="gunguruuSound" preload="auto">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-indian-bells-1731.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    let bellInterval;
+    let gunguruuInterval;
 
-    function startWalk() {
+    function startGunguruu() {
       document.getElementById("text").style.display = "none";
+      document.querySelector("button").style.display = "none";
       document.getElementById("walkArea").style.display = "block";
 
-      const bell = document.getElementById("bellSound");
+      const sound = document.getElementById("gunguruuSound");
 
-      // Play bell repeatedly like anklets while walking
-      bellInterval = setInterval(() => {
-        bell.currentTime = 0;
-        bell.play();
-      }, 600); // sync with step animation
+      // Musical gunguruu rhythm
+      gunguruuInterval = setInterval(() => {
+        sound.currentTime = 0;
+        sound.play();
+      }, 700); // smooth classical rhythm
     }
   </script>
 
