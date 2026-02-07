@@ -2,91 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Skeleton Gunguruu Walk</title>
+  <title>Gunguruu Walk</title>
 
   <style>
     body {
-      background: #0f0f0f;
-      color: white;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      padding-top: 40px;
+      margin: 0;
+      padding: 0;
+      background: #f5e6d3;
       overflow: hidden;
+      font-family: Arial, sans-serif;
+      text-align: center;
     }
 
     #text {
-      margin-bottom: 20px;
+      margin-top: 30px;
       font-size: 18px;
     }
 
     button {
+      margin-top: 15px;
       padding: 12px 30px;
-      font-size: 16px;
       border-radius: 25px;
       border: none;
-      background: #ff4d6d;
+      background: #c94f4f;
       color: white;
+      font-size: 16px;
       cursor: pointer;
     }
 
     #walkArea {
       display: none;
-      margin-top: 40px;
-      height: 160px;
-      position: relative;
-    }
-
-    .legs {
       position: absolute;
-      left: -250px;
-      display: flex;
-      gap: 40px;
-      animation: walk 4s linear infinite;
+      bottom: 20px;
+      width: 100%;
+      height: 300px;
     }
 
-    .leg {
-      width: 18px;
-      height: 110px;
-      background: #eaeaea;
-      border-radius: 10px;
-      position: relative;
-      animation: step 0.7s ease-in-out infinite alternate;
-    }
-
-    .leg::before {
-      content: "";
+    #ankleImage {
       position: absolute;
-      top: -18px;
-      left: -10px;
-      width: 38px;
-      height: 22px;
-      background: #eaeaea;
-      border-radius: 50%;
-    }
-
-    .leg.right {
-      animation-delay: 0.35s;
-    }
-
-    .anklet {
-      position: absolute;
-      bottom: 10px;
-      left: -10px;
-      width: 38px;
-      height: 8px;
-      background: gold;
-      border-radius: 10px;
-      box-shadow: 0 0 15px gold;
-    }
-
-    @keyframes step {
-      from { transform: rotate(8deg); }
-      to { transform: rotate(-8deg); }
+      left: -300px;
+      bottom: 0;
+      width: 280px;
+      animation: walk 6s linear infinite;
     }
 
     @keyframes walk {
-      from { left: -250px; }
-      to { left: 100%; }
+      from {
+        left: -300px;
+      }
+      to {
+        left: 100%;
+      }
     }
   </style>
 </head>
@@ -97,38 +63,25 @@
     Rahul, click on the button below
   </div>
 
-  <button onclick="startWalk()">Click Me 😌</button>
+  <button onclick="startShow()">Click Me 😌</button>
 
   <div id="walkArea">
-    <div class="legs">
-      <div class="leg left">
-        <div class="anklet"></div>
-      </div>
-      <div class="leg right">
-        <div class="anklet"></div>
-      </div>
-    </div>
+    <img id="ankleImage" src="gunguruu.png" alt="Gunguruu Anklet">
   </div>
 
-  <!-- Gunguruu / Payal Sound -->
-  <audio id="gunguruu" preload="auto">
+  <!-- Gunguruu Song -->
+  <audio id="gunguruuSong" preload="auto" loop>
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-indian-bells-1731.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    let soundInterval;
-
-    function startWalk() {
+    function startShow() {
       document.getElementById("text").style.display = "none";
       document.querySelector("button").style.display = "none";
       document.getElementById("walkArea").style.display = "block";
 
-      const sound = document.getElementById("gunguruu");
-
-      soundInterval = setInterval(() => {
-        sound.currentTime = 0;
-        sound.play();
-      }, 700);
+      const song = document.getElementById("gunguruuSong");
+      song.play();
     }
   </script>
 
