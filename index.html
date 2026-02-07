@@ -2,88 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Gunguruu Walk</title>
-
+  <title>Message</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: #f5e6d3;
+      font-family: monospace;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: #e5e7eb;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      font-family: Arial, sans-serif;
-      text-align: center;
     }
 
-    #text {
-      margin-top: 30px;
-      font-size: 18px;
+    .container {
+      text-align: center;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 30px;
     }
 
     button {
-      margin-top: 15px;
-      padding: 12px 30px;
-      border-radius: 25px;
-      border: none;
-      background: #c94f4f;
-      color: white;
+      font-family: monospace;
+      padding: 14px 26px;
       font-size: 16px;
+      border-radius: 8px;
+      border: none;
       cursor: pointer;
+      background: #f59e0b;
+      color: #3b1d00;
     }
 
-    #walkArea {
-      display: none;
+    .message {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.6;
+    }
+
+    .angry {
       position: absolute;
-      bottom: 20px;
-      width: 100%;
-      height: 300px;
+      font-size: 24px;
+      animation: float 2s linear forwards;
     }
 
-    #ankleImage {
-      position: absolute;
-      left: -300px;
-      bottom: 0;
-      width: 280px;
-      animation: walk 6s linear infinite;
-    }
-
-    @keyframes walk {
-      from {
-        left: -300px;
+    @keyframes float {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
       }
-      to {
-        left: 100%;
+      100% {
+        opacity: 0;
+        transform: translateY(-160px);
       }
     }
   </style>
 </head>
-
 <body>
 
-  <div id="text">
-    Rahul, click on the button below
-  </div>
+<div class="container">
+  <h1 id="title">Rahul, click on the button below</h1>
 
-  <button onclick="startShow()">Click Me 😌</button>
+  <button id="actionBtn" onclick="showAnger()">CLICK HERE</button>
 
-  <div id="walkArea">
-    <img id="ankleImage" src="gunguruu.png" alt="Gunguruu Anklet">
-  </div>
+  <div class="message" id="message"></div>
+</div>
 
-  <!-- Gunguruu Song -->
-  <audio id="gunguruuSong" preload="auto" loop>
-    <source src="https://assets.mixkit.co/sfx/preview/mixkit-indian-bells-1731.mp3" type="audio/mpeg">
-  </audio>
+<script>
+  let angryInterval;
 
-  <script>
-    function startShow() {
-      document.getElementById("text").style.display = "none";
-      document.querySelector("button").style.display = "none";
-      document.getElementById("walkArea").style.display = "block";
+  function showAnger() {
+    // Remove button
+    document.getElementById("actionBtn").remove();
 
-      const song = document.getElementById("gunguruuSong");
-      song.play();
-    }
-  </script>
+    // Show Telugu message
+    document.getElementById("message").innerText =
+      "పెద్దునే లేచి కాల్ చేయాలని లేదు ఏమి లేదు..\nనువ్వు నిజంగా unbelievable.";
+
+    // Start angry emoji rain
+    angryInterval = setInterval(createAngryEmoji, 200);
+  }
+
+  function createAngryEmoji() {
+    const emojis = ["😡", "😤", "🤬"];
+    const emoji = document.createElement("div");
+    emoji.className = "angry";
+    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+    emoji.style.left = Math.random() * window.innerWidth + "px";
+    emoji.style.top = "80%";
+
+    document.body.appendChild(emoji);
+
+    setTimeout(() => emoji.remove(), 2000);
+  }
+</script>
 
 </body>
 </html>
