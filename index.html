@@ -48,8 +48,9 @@
 
     .status {
       margin-top: 30px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
+      white-space: pre-line;
     }
 
     .heart {
@@ -69,7 +70,7 @@
 <div class="container">
   <h1 id="question">💘 Rahul, will you be my Valentine?</h1>
 
-  <button class="yes" onclick="accept()">YES</button>
+  <button class="yes" id="yesBtn" onclick="accept()">YES</button>
   <button class="no" id="noBtn" onmouseover="runAway()">NO</button>
 
   <div class="status" id="status"></div>
@@ -77,11 +78,23 @@
 
 <script>
   function accept() {
-    document.getElementById("question").innerText =
-      "Confirmed ❤️";
-    document.getElementById("status").innerHTML =
-      "✅ 200 OK — Valentine accepted 💘<br>Retry-After: Never 😌";
+    // Change question text
+    document.getElementById("question").innerText = "Confirmed ❤️";
 
+    // Remove NO button
+    const noBtn = document.getElementById("noBtn");
+    if (noBtn) noBtn.remove();
+
+    // Optional: disable YES button so it can’t be clicked again
+    document.getElementById("yesBtn").disabled = true;
+
+    // Show final message
+    document.getElementById("status").innerText =
+      "✅ 200 OK — Valentine accepted 💘\n" +
+      "Retry-After: Never 😌\n\n" +
+      "Valentine accepted 💘 there is no going back.";
+
+    // Hearts
     for (let i = 0; i < 20; i++) {
       createHeart();
     }
