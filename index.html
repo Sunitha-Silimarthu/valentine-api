@@ -9,6 +9,7 @@
       background: linear-gradient(135deg, #020617, #0f172a);
       color: #e5e7eb;
       height: 100vh;
+      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -41,6 +42,7 @@
       font-size: 18px;
       font-weight: bold;
       line-height: 1.6;
+      white-space: pre-line;
     }
 
     .angry {
@@ -66,24 +68,25 @@
 <div class="container">
   <h1 id="title">Rahul, click on the button below</h1>
 
-  <button id="actionBtn" onclick="showAnger()">CLICK HERE</button>
+  <button id="actionBtn" onclick="showAnger()">Babyluu</button>
 
   <div class="message" id="message"></div>
 </div>
 
 <script>
-  let angryInterval;
-
   function showAnger() {
+    // Remove title text
+    document.getElementById("title").remove();
+
     // Remove button
     document.getElementById("actionBtn").remove();
 
-    // Show Telugu message
+    // Show Telugu angry message
     document.getElementById("message").innerText =
-      "పెద్దునే లేచి కాల్ చేయాలని లేదు ఏమి లేదు..\nనువ్వు నిజంగా unbelievable.";
+      "పెద్దునే లేచి కాల్ చేయాలని లేదు ఏమి లేదు..\n YOU ARE UNBELIEVABLE.";
 
-    // Start angry emoji rain
-    angryInterval = setInterval(createAngryEmoji, 200);
+    // Start angry emoji animation
+    setInterval(createAngryEmoji, 200);
   }
 
   function createAngryEmoji() {
