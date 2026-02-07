@@ -2,99 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Valentine API</title>
+  <title>Valentine</title>
   <style>
     body {
       font-family: monospace;
       background: linear-gradient(135deg, #020617, #0f172a);
       color: #e5e7eb;
-      padding: 40px;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
-    h2 {
-      margin-bottom: 20px;
-    }
-    .json {
-      background: #020617;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
-    .key { color: #38bdf8; }
-    .string { color: #86efac; }
 
-    .buttons {
-      margin-top: 25px;
-      position: relative;
+    .container {
+      text-align: center;
     }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
     button {
       font-family: monospace;
-      padding: 10px 18px;
+      padding: 12px 22px;
+      font-size: 16px;
       border-radius: 8px;
       border: none;
       cursor: pointer;
-      font-size: 14px;
+      margin: 10px;
       position: relative;
     }
+
     .yes {
       background: #22c55e;
       color: #022c22;
-      margin-right: 10px;
     }
+
     .no {
       background: #ef4444;
       color: #450a0a;
       position: absolute;
     }
 
-    .response {
-      margin-top: 25px;
+    .status {
+      margin-top: 30px;
+      font-size: 18px;
       font-weight: bold;
-      font-size: 16px;
     }
 
     .heart {
       position: absolute;
-      font-size: 20px;
+      font-size: 22px;
       animation: float 2s ease-out forwards;
     }
 
     @keyframes float {
       0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-120px); }
+      100% { opacity: 0; transform: translateY(-140px); }
     }
   </style>
 </head>
 <body>
 
-<h2>GET /api/valentine</h2>
+<div class="container">
+  <h1 id="question">💘 Rahul, will you be my Valentine?</h1>
 
-<div class="json" id="json">
-<pre>{
-  <span class="key">"question"</span>: <span class="string">"Will you be my Valentine?"</span>,
-  <span class="key">"allowedResponses"</span>: [<span class="string">"YES"</span>],
-  <span class="key">"fallback"</span>: <span class="string">"No alternative endpoint available"</span>,
-  <span class="key">"status"</span>: <span class="string" id="status">"Awaiting confirmation ❤️"</span>
-}</pre>
-</div>
-
-<div class="buttons">
   <button class="yes" onclick="accept()">YES</button>
   <button class="no" id="noBtn" onmouseover="runAway()">NO</button>
-</div>
 
-<div class="response" id="response"></div>
+  <div class="status" id="status"></div>
+</div>
 
 <script>
   function accept() {
-    document.getElementById("status").innerText = "Confirmed ❤️";
-    document.getElementById("response").innerHTML =
-      "✅ 200 OK<br>Valentine accepted 💘<br><br>" +
-      "Headers:<br>" +
-      "Love-Level: Infinite<br>" +
-      "Retry-After: Never 😌";
+    document.getElementById("question").innerText =
+      "Confirmed ❤️";
+    document.getElementById("status").innerHTML =
+      "✅ 200 OK — Valentine accepted 💘<br>Retry-After: Never 😌";
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       createHeart();
     }
   }
