@@ -6,81 +6,96 @@
 body{
     margin:0;
     height:100vh;
+    overflow:hidden;
+    background:linear-gradient(to bottom,#fff0f5,#ffe4ec);
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#fff0f5;
-    overflow:hidden;
     font-family:Arial,sans-serif;
 }
 
 .container{
     text-align:center;
+    z-index:10;
 }
 
 button{
-    padding:12px 24px;
-    font-size:18px;
+    padding:15px 30px;
+    font-size:20px;
     border:none;
-    border-radius:25px;
-    cursor:pointer;
+    border-radius:30px;
     background:#ff4d88;
     color:white;
+    cursor:pointer;
+}
+
+#message{
+    display:none;
+    margin-top:20px;
+    font-size:28px;
+    color:#ff4d88;
+    font-weight:bold;
 }
 
 .kiss{
     position:absolute;
-    font-size:32px;
-    animation:floatUp 3s linear forwards;
+    bottom:-50px;
+    font-size:35px;
+    pointer-events:none;
+    animation:floatUp 4s linear forwards;
 }
 
 @keyframes floatUp{
     0%{
+        transform:translateY(0) rotate(0deg);
         opacity:1;
-        transform:translateY(0) scale(1);
     }
     100%{
+        transform:translateY(-120vh) rotate(360deg);
         opacity:0;
-        transform:translateY(-400px) scale(1.8);
     }
-}
-
-#message{
-    margin-top:20px;
-    font-size:24px;
-    color:#ff4d88;
-    display:none;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
-    <h2>😴 Sleep Alert 😴</h2>
-    <button onclick="sendKisses()">Click Me ❤️</button>
-    <div id="message">😘 Emergency Kiss Delivered to my swammyyyyyyy😘</div>
+    <button onclick="startLove()">Sleepy alert ❤️</button>
+    <div id="message">
+        😘 Emergency Kiss Delivered to my sleepy Swammyyyyy 😘
+    </div>
 </div>
 
 <script>
-function sendKisses(){
-    document.getElementById("message").style.display="block";
+let started = false;
 
-    for(let i=0;i<25;i++){
-        let kiss=document.createElement("div");
-        kiss.innerHTML="😘💋";
-        kiss.className="kiss";
+function createKiss(){
+    const kiss = document.createElement("div");
+    kiss.className = "kiss";
+    kiss.innerHTML = "😘";
 
-        kiss.style.left=(Math.random()*window.innerWidth)+"px";
-        kiss.style.bottom="0px";
+    kiss.style.left = Math.random() * window.innerWidth + "px";
+    kiss.style.fontSize = (25 + Math.random()*25) + "px";
 
-        document.body.appendChild(kiss);
+    document.body.appendChild(kiss);
 
-        setTimeout(()=>{
-            kiss.remove();
-        },3000);
-    }
+    setTimeout(() => {
+        kiss.remove();
+    }, 4000);
+}
+
+function startLove(){
+    if(started) return;
+    started = true;
+
+    document.getElementById("message").style.display = "block";
+
+    // Continuous kiss shower
+    setInterval(createKiss, 150);
 }
 </script>
+
 </body>
 </html>
-
+```
