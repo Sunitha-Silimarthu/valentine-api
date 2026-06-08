@@ -1,108 +1,86 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Message</title>
-  <style>
-    body {
-      font-family: monospace;
-      background: linear-gradient(135deg, #020617, #0f172a);
-      color: #e5e7eb;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff0f5;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+}
 
-    .container {
-      text-align: center;
-      max-width: 90%;
-    }
+.container{
+    text-align:center;
+}
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 30px;
-    }
+button{
+    padding:12px 24px;
+    font-size:18px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    background:#ff4d88;
+    color:white;
+}
 
-    button {
-      font-family: monospace;
-      padding: 14px 26px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background: #f59e0b;
-      color: #3b1d00;
-    }
+.kiss{
+    position:absolute;
+    font-size:32px;
+    animation:floatUp 3s linear forwards;
+}
 
-    .message {
-      margin-top: 30px;
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 1.6;
-      white-space: pre-line;
+@keyframes floatUp{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
     }
+    100%{
+        opacity:0;
+        transform:translateY(-400px) scale(1.8);
+    }
+}
 
-    .angry {
-      position: absolute;
-      font-size: 24px;
-      animation: float 2s linear forwards;
-    }
-
-    @keyframes float {
-      0% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-160px);
-      }
-    }
-  </style>
+#message{
+    margin-top:20px;
+    font-size:24px;
+    color:#ff4d88;
+    display:none;
+}
+</style>
 </head>
+
 <body>
-
 <div class="container">
-  <h1 id="title">Rahul, click on the button below</h1>
-
-  <button id="actionBtn" onclick="showAnger()">Babyluu</button>
-
-  <div class="message" id="message"></div>
+    <h2>😴 Sleep Alert 😴</h2>
+    <button onclick="sendKisses()">Click Me ❤️</button>
+    <div id="message">😘 Emergency Kiss Delivered 😘</div>
 </div>
 
 <script>
-  function showAnger() {
-    // Remove title text
-    document.getElementById("title").remove();
+function sendKisses(){
+    document.getElementById("message").style.display="block";
 
-    // Remove button
-    document.getElementById("actionBtn").remove();
+    for(let i=0;i<25;i++){
+        let kiss=document.createElement("div");
+        kiss.innerHTML="😘";
+        kiss.className="kiss";
 
-    // Show Telugu angry message
-    document.getElementById("message").innerText =
-      "పెద్దునే లేచి కాల్ చేయాలని లేదు ఏమి లేదు..\n YOU ARE UNBELIEVABLE.";
+        kiss.style.left=(Math.random()*window.innerWidth)+"px";
+        kiss.style.bottom="0px";
 
-    // Start angry emoji animation
-    setInterval(createAngryEmoji, 200);
-  }
+        document.body.appendChild(kiss);
 
-  function createAngryEmoji() {
-    const emojis = ["😡", "😤", "🤬"];
-    const emoji = document.createElement("div");
-    emoji.className = "angry";
-    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-
-    emoji.style.left = Math.random() * window.innerWidth + "px";
-    emoji.style.top = "80%";
-
-    document.body.appendChild(emoji);
-
-    setTimeout(() => emoji.remove(), 2000);
-  }
+        setTimeout(()=>{
+            kiss.remove();
+        },3000);
+    }
+}
 </script>
-
 </body>
 </html>
+```
