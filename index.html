@@ -1,86 +1,349 @@
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Tired Boy ❤️</title>
+
 <style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#fff0f5;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
+* {
+    box-sizing: border-box;
 }
 
-.container{
-    text-align:center;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff1f5, #ffe4ec);
+    color: #4a3038;
+    text-align: center;
+    overflow-x: hidden;
 }
 
-button{
-    padding:12px 24px;
-    font-size:18px;
-    border:none;
-    border-radius:25px;
-    cursor:pointer;
-    background:#ff4d88;
-    color:white;
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
 }
 
-.kiss{
-    position:absolute;
-    font-size:32px;
-    animation:floatUp 3s linear forwards;
+.card {
+    background: rgba(255,255,255,0.9);
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 25px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(120,60,80,0.15);
 }
 
-@keyframes floatUp{
-    0%{
-        opacity:1;
-        transform:translateY(0) scale(1);
+h1 {
+    color: #c05270;
+    font-size: 38px;
+}
+
+h2 {
+    color: #b54868;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.big {
+    font-size: 70px;
+    animation: pulse 1.5s infinite;
+}
+
+button {
+    border: none;
+    padding: 14px 25px;
+    margin: 10px;
+    border-radius: 25px;
+    background: #c05270;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+.hug {
+    font-size: 90px;
+    animation: hug 1s infinite alternate;
+}
+
+.progress {
+    width: 100%;
+    background: #f5d5df;
+    height: 15px;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.bar {
+    width: 0%;
+    height: 100%;
+    background: #c05270;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.heart {
+    position: fixed;
+    font-size: 25px;
+    animation: float 4s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.12); }
+}
+
+@keyframes hug {
+    from { transform: scale(1); }
+    to { transform: scale(1.12); }
+}
+
+@keyframes float {
+    from {
+        bottom: 0;
+        opacity: 1;
     }
-    100%{
-        opacity:0;
-        transform:translateY(-400px) scale(1.8);
+    to {
+        bottom: 100vh;
+        opacity: 0;
+        transform: translateX(100px) rotate(360deg);
     }
-}
-
-#message{
-    margin-top:20px;
-    font-size:24px;
-    color:#ff4d88;
-    display:none;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
-    <h2>😴 Sleep Alert 😴</h2>
-    <button onclick="sendKisses()">Click Me for suprise❤️</button>
-    <div id="message">😘 Emergency Kiss Delivered to my sleepy swammmmy 😘</div>
+
+<div class="card">
+
+    <!-- SCREEN 1 -->
+    <div id="screen1">
+
+        <div class="big">🥺❤️</div>
+
+        <h1>Hey, sleepyhead...</h1>
+
+        <p>
+            I know you're tired.<br>
+            Like REALLY tired. 😭
+        </p>
+
+        <button onclick="next(2)">
+            I know... 😴
+        </button>
+
+    </div>
+
+
+    <!-- SCREEN 2 -->
+    <div id="screen2" class="hidden">
+
+        <div class="big">🫂</div>
+
+        <h2>Emergency Hug Activated</h2>
+
+        <p>
+            You've been working so hard lately.
+            <br><br>
+            So here's a hug.
+            <br>
+            And no, you cannot escape.
+        </p>
+
+        <div class="hug">🫂</div>
+
+        <button onclick="next(3)">
+            Okay... what now? 👀
+        </button>
+
+    </div>
+
+
+    <!-- SCREEN 3 -->
+    <div id="screen3" class="hidden">
+
+        <div class="big">🎯</div>
+
+        <h2>One tiny challenge</h2>
+
+        <p>
+            You have one very important mission:
+        </p>
+
+        <h2>SMILE 😤</h2>
+
+        <p>
+            Click the button until your smile meter reaches 100%.
+        </p>
+
+        <div class="progress">
+            <div class="bar" id="bar"></div>
+        </div>
+
+        <p id="percent">0%</p>
+
+        <button onclick="smile()">😐 → 😏</button>
+
+        <div id="success" class="hidden">
+
+            <h2>MISSION ACCOMPLISHED! 🎉</h2>
+
+            <p>
+                See? That wasn't so difficult. 😌
+            </p>
+
+            <button onclick="next(4)">
+                One last thing ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SCREEN 4 -->
+    <div id="screen4" class="hidden">
+
+        <div class="big">🌙❤️</div>
+
+        <h2>A little reminder...</h2>
+
+        <p>
+            You don't have to be productive every second.
+            <br><br>
+            You don't have to solve everything tonight.
+            <br><br>
+            And you definitely don't have to sacrifice
+            all your sleep.
+        </p>
+
+        <button onclick="next(5)">
+            But why did you make this? 🥺
+        </button>
+
+    </div>
+
+
+    <!-- SCREEN 5 -->
+    <div id="screen5" class="hidden">
+
+        <div class="big">❤️</div>
+
+        <h1>Because...</h1>
+
+        <p>
+            Someone loves you very much.
+            <br><br>
+
+            And that someone wants her
+            very hardworking,
+            very sleepy,
+            slightly crazy boyfriend
+            to take care of himself too. 🥺
+        </p>
+
+        <h2>Now go sleep. 😤</h2>
+
+        <p>
+            The wedding isn't going anywhere.
+            <br><br>
+            We'll figure everything out together. ❤️
+        </p>
+
+        <button onclick="makeItRain()">
+            Sending you 100 hugs 🫂
+        </button>
+
+    </div>
+
+</div>
 </div>
 
+
 <script>
-function sendKisses(){
-    document.getElementById("message").style.display="block";
 
-    for(let i=0;i<25;i++){
-        let kiss=document.createElement("div");
-        kiss.innerHTML="😘";
-        kiss.className="kiss";
+function next(number) {
 
-        kiss.style.left=(Math.random()*window.innerWidth)+"px";
-        kiss.style.bottom="0px";
+    for(let i = 1; i <= 5; i++) {
+        document.getElementById("screen" + i)
+            .classList.add("hidden");
+    }
 
-        document.body.appendChild(kiss);
+    document.getElementById("screen" + number)
+        .classList.remove("hidden");
+}
 
-        setTimeout(()=>{
-            kiss.remove();
-        },3000);
+
+let progress = 0;
+
+function smile() {
+
+    progress += 20;
+
+    if(progress > 100) {
+        progress = 100;
+    }
+
+    document.getElementById("bar").style.width =
+        progress + "%";
+
+    document.getElementById("percent").innerText =
+        progress + "%";
+
+    if(progress === 100) {
+        document.getElementById("success")
+            .classList.remove("hidden");
+
+        makeItRain();
     }
 }
+
+
+function makeItRain() {
+
+    for(let i = 0; i < 30; i++) {
+
+        let heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerHTML =
+            ["❤️","💕","🫂","💗","✨"][Math.floor(Math.random()*5)];
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+}
+
 </script>
+
 </body>
 </html>
 ```
