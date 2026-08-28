@@ -41,6 +41,7 @@ body {
 h1 {
     color: #c05270;
     font-size: 38px;
+    line-height: 1.3;
 }
 
 h2 {
@@ -71,17 +72,53 @@ button {
 
 button:hover {
     transform: scale(1.05);
+    background: #aa4560;
 }
 
 .hidden {
     display: none;
 }
 
+/* Hug animation */
 .hug {
-    font-size: 90px;
-    animation: hug 1s infinite alternate;
+    font-size: 95px;
+    margin: 25px 0;
+    animation: hug 1.2s infinite ease-in-out;
 }
 
+@keyframes hug {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* Heart animation */
+.heart {
+    position: fixed;
+    font-size: 25px;
+    animation: float 4s linear forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes float {
+    from {
+        bottom: 0;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 100vh;
+        opacity: 0;
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+/* Progress bar */
 .progress {
     width: 100%;
     background: #f5d5df;
@@ -98,41 +135,40 @@ button:hover {
     transition: 0.5s;
 }
 
-.heart {
-    position: fixed;
-    font-size: 25px;
-    animation: float 4s linear forwards;
-    pointer-events: none;
+#percent {
+    font-weight: bold;
+    color: #b54868;
 }
 
-@keyframes pulse {
-    50% { transform: scale(1.12); }
-}
+@media (max-width: 600px) {
 
-@keyframes hug {
-    from { transform: scale(1); }
-    to { transform: scale(1.12); }
-}
-
-@keyframes float {
-    from {
-        bottom: 0;
-        opacity: 1;
+    .card {
+        padding: 35px 20px;
     }
-    to {
-        bottom: 100vh;
-        opacity: 0;
-        transform: translateX(100px) rotate(360deg);
+
+    h1 {
+        font-size: 32px;
     }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 17px;
+    }
+
 }
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
 <div class="card">
+
 
     <!-- SCREEN 1 -->
     <div id="screen1">
@@ -165,10 +201,12 @@ button:hover {
             <br><br>
             So here's a hug.
             <br>
-            And no, you cannot escape.
+            And no, you cannot escape. 😌
         </p>
 
-        <div class="hug">🫂</div>
+        <div class="hug">
+            🫂
+        </div>
 
         <button onclick="next(3)">
             Okay... what now? 👀
@@ -200,7 +238,9 @@ button:hover {
 
         <p id="percent">0%</p>
 
-        <button onclick="smile()">😐 → 😏</button>
+        <button onclick="smile()">
+            😐 → 😏
+        </button>
 
         <div id="success" class="hidden">
 
@@ -247,32 +287,18 @@ button:hover {
 
         <div class="big">❤️</div>
 
-        <h1>Because...</h1>
+        <h1>I'm right here with you. 🫂</h1>
 
-        <p>
-            Someone loves you very much.
-            <br><br>
-
-            And that someone wants her
-            very hardworking,
-            very sleepy,
-            slightly crazy boyfriend
-            to take care of himself too. 🥺
-        </p>
-
-        <h2>Now go sleep. 😤</h2>
-
-        <p>
-            The wedding isn't going anywhere.
-            <br><br>
-            We'll figure everything out together. ❤️
-        </p>
+        <div class="hug">
+            🫂
+        </div>
 
         <button onclick="makeItRain()">
-            Sending you 100 hugs 🫂
+            One more hug ❤️
         </button>
 
     </div>
+
 
 </div>
 </div>
@@ -280,17 +306,24 @@ button:hover {
 
 <script>
 
+/* Move between screens */
+
 function next(number) {
 
     for(let i = 1; i <= 5; i++) {
-        document.getElementById("screen" + i)
+
+        document
+            .getElementById("screen" + i)
             .classList.add("hidden");
     }
 
-    document.getElementById("screen" + number)
+    document
+        .getElementById("screen" + number)
         .classList.remove("hidden");
 }
 
+
+/* Smile meter */
 
 let progress = 0;
 
@@ -309,13 +342,17 @@ function smile() {
         progress + "%";
 
     if(progress === 100) {
-        document.getElementById("success")
+
+        document
+            .getElementById("success")
             .classList.remove("hidden");
 
         makeItRain();
     }
 }
 
+
+/* Floating hearts */
 
 function makeItRain() {
 
@@ -326,7 +363,9 @@ function makeItRain() {
         heart.className = "heart";
 
         heart.innerHTML =
-            ["❤️","💕","🫂","💗","✨"][Math.floor(Math.random()*5)];
+            ["❤️","💕","🫂","💗","✨"][
+                Math.floor(Math.random() * 5)
+            ];
 
         heart.style.left =
             Math.random() * 100 + "vw";
